@@ -401,6 +401,10 @@ export async function setEnableOrDisable(script_id: number, enable: boolean) {
 }
 
 export async function getAllModulesKeys() {
+  // return {
+  //   data: ["StartEnd", "Math", "String", "Number"],
+  // };
+
   return api.get("/kernel/getAllModulesKeys", {
     headers: {
       Authorization: await getAuthToken(),
@@ -409,6 +413,176 @@ export async function getAllModulesKeys() {
 }
 
 export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
+  // if (module_tag === "StartEnd")
+  //   return {
+  //     data: [
+  //       {
+  //         module: "StartEnd",
+  //         wrapper: "Start",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local"],
+  //           arg_schema: {},
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //       {
+  //         module: "StartEnd",
+  //         wrapper: "End",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local"],
+  //           arg_schema: {},
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //     ],
+  //   };
+  // if (module_tag === "Math")
+  //   return {
+  //     data: [
+  //       {
+  //         module: "Math",
+  //         wrapper: "AddNumbers",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             a: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "number"],
+  //             },
+  //             b: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "number"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //     ],
+  //   };
+  // if (module_tag === "String")
+  //   return {
+  //     data: [
+  //       {
+  //         module: "String",
+  //         wrapper: "Concat",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             firstString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //             concat_symbol: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //             secondString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "string"],
+  //       },
+  //       {
+  //         module: "String",
+  //         wrapper: "Length",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             inputString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //       {
+  //         module: "String",
+  //         wrapper: "Split",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             firstString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //             concat_symbol: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //             secondString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["module", "List"],
+  //       },
+  //       {
+  //         module: "String",
+  //         wrapper: "Trim",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             inputString: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "string"],
+  //       },
+  //     ],
+  //   };
+  // if (module_tag === "Number")
+  //   return {
+  //     data: [
+  //       {
+  //         module: "Number",
+  //         wrapper: "ParseFloat",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             expect_number: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //       {
+  //         module: "Number",
+  //         wrapper: "ParseInt",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             expect_number: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "number"],
+  //       },
+  //       {
+  //         module: "Number",
+  //         wrapper: "ToString",
+  //         wrapper_arguments: {
+  //           avalible_from: ["local", "context"],
+  //           arg_schema: {
+  //             expect_number: {
+  //               avalible_from: ["local", "other_wrapper", "context"],
+  //               type: ["primitive", "string"],
+  //             },
+  //           },
+  //         },
+  //         wrapper_result_schema: ["primitive", "string"],
+  //       },
+  //     ],
+  //   };
   return api.get("/kernel/getAllModuleFunctionsByModuleTag/" + module_tag, {
     headers: {
       Authorization: await getAuthToken(),

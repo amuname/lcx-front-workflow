@@ -7,5 +7,5 @@ export interface WrapperBlockSchema {
   wrapper_arguments: object;
   wrapper_result_schema: ResType;
   prev_id: string;
-  next: [{ id: string }] | never[];
+  next: string;
 }

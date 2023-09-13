@@ -45,8 +45,7 @@
     let last_wrapper_block_id = "start";
 
     while (last_wrapper_block_id !== "end") {
-      const next_wrapper_block_id =
-        props.tabScript[last_wrapper_block_id].next[0].id;
+      const next_wrapper_block_id = props.tabScript[last_wrapper_block_id].next;
       const next_wrapper_block = props.tabScript[next_wrapper_block_id];
       wrapper_blocks.push(next_wrapper_block);
       last_wrapper_block_id = next_wrapper_block.id;
@@ -92,7 +91,7 @@
               flat
             >
               <q-btn
-                :disable="wrapper.next[0].id === 'end'"
+                :disable="wrapper.next === 'end'"
                 flat
                 icon="arrow_downward"
                 @click="moveWrapperBlock('down', wrapper)"

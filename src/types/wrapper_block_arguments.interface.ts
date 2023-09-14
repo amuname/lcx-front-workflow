@@ -15,6 +15,8 @@ export interface WrapperBlockArgumentsArgSchema {
 }
 
 export interface WrapperBlockArgumentsArgSchemaValue {
+  name: string;
+  description: string;
   avalible_from: ArgPlacementArray;
   type: ArgType;
 }

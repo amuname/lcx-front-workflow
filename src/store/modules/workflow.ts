@@ -12,7 +12,11 @@ const defaultScript = (): Record<string, WrapperBlockSchema> => ({
     wrapper: "Start",
     wrapper_arguments: {},
     wrapper_result_schema: [],
-    next_id: "",
+    next: [
+      {
+        id: "end",
+      },
+    ],
   },
   end: {
     id: "end",
@@ -21,7 +25,7 @@ const defaultScript = (): Record<string, WrapperBlockSchema> => ({
     wrapper: "End",
     wrapper_arguments: {},
     wrapper_result_schema: [],
-    next_id: "",
+    next: [],
   },
 });
 
@@ -56,7 +60,7 @@ class Wrapper implements WrapperBlockSchema {
   public wrapper_arguments: object;
   public wrapper_result_schema: any;
   public prev_id: string;
-  public next: string;
+  public next: [{ id: string }] | never[];
 
   constructor(
     wrapper_module: string,
@@ -71,7 +75,7 @@ class Wrapper implements WrapperBlockSchema {
     this.wrapper_arguments = {};
     this.wrapper_result_schema = wrapper_result_schema;
     this.prev_id = prev_id;
-    this.next = next_id;
+    this.next = [{ id: next_id }];
     // this.next.push({ id: next_id });
   }
 }
@@ -173,7 +177,7 @@ export const useWorkflowStore = defineStore("workflow", () => {
 
     unref(work_tabs)[tab_id].script[wrapper.id] = wrapper;
 
-    start_block.next = wrapper.id;
+    start_block.next[0].id = wrapper.id;
     end_block.prev_id = wrapper.id;
     return wrapper;
   }
@@ -182,10 +186,10 @@ export const useWorkflowStore = defineStore("workflow", () => {
     const tab_script = unref(work_tabs)[tab_id].script;
     const wrapper_id = wrapper.id;
     const prev_id = wrapper.prev_id;
-    const next_id = wrapper.next;
+    const next_id = wrapper.next[0].id;
 
-    tab_script[prev_id].next = next_id;
-    tab_script.next_id.prev_id = prev_id;
+    tab_script[prev_id].next[0].id = next_id;
+    tab_script[next_id].prev_id = prev_id;
     delete tab_script[wrapper_id];
   }
 
@@ -206,7 +210,7 @@ export const useWorkflowStore = defineStore("workflow", () => {
   ) {
     const tab_script = unref(work_tabs)[tab_id].script;
     const cur_wrapper = tab_script[cur_id];
-    cur_wrapper.next = next_id;
+    cur_wrapper.next[0].id = next_id;
   }
 
   function moveWrapperBlock(
@@ -216,7 +220,7 @@ export const useWorkflowStore = defineStore("workflow", () => {
   ) {
     const tab_script = unref(work_tabs)[tab_id].script;
     const prev_id = wrapper.prev_id;
-    const next_id = wrapper.next[0];
+    const next_id = wrapper.next[0].id;
     if (direction === "up") {
       const prev_prev_id = tab_script[prev_id].prev_id;
       setTabWrapperPevId(tab_id, wrapper.id, prev_prev_id);
@@ -226,7 +230,7 @@ export const useWorkflowStore = defineStore("workflow", () => {
       setTabWrapperNextId(tab_id, prev_id, next_id);
       setTabWrapperNextId(tab_id, prev_prev_id, wrapper.id);
     } else if (direction === "down") {
-      const next_next_id = tab_script[next_id].next[0];
+      const next_next_id = tab_script[next_id].next[0].id;
       setTabWrapperPevId(tab_id, wrapper.id, next_id);
       setTabWrapperPevId(tab_id, next_id, prev_id);
       setTabWrapperPevId(tab_id, next_next_id, wrapper.id);

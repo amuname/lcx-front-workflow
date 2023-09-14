@@ -194,6 +194,8 @@
           placement_state_model_value == 'mixed'
         "
         :key="arg_key"
+        :name="arg_value.name"
+        :description="arg_value.description"
         :avalible-from="arg_value.avalible_from"
         :form-data-type="arg_value.type"
         :arg-key="arg_key"

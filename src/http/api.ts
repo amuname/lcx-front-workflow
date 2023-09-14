@@ -446,10 +446,14 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             a: {
+  //               name: "Argument A",
+  //               description: "A + b",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "number"],
   //             },
   //             b: {
+  //               name: "Argument B",
+  //               description: "a + B",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "number"],
   //             },
@@ -469,14 +473,23 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             firstString: {
+  //               name: "First string",
+  //               description:
+  //                 'First string or char to concat "first string + concat symbol + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
   //             concat_symbol: {
+  //               name: "Concat symbol or string",
+  //               description:
+  //                 'Concat string or char to concat "first string + concat symbol + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
   //             secondString: {
+  //               name: "Second string",
+  //               description:
+  //                 'Second string or char to concat "first string + concat symbol + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -491,6 +504,8 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             inputString: {
+  //               name: "Input string",
+  //               description: "Get conut of chars in string",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -505,14 +520,23 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             firstString: {
+  //               name: "First string",
+  //               description:
+  //                 'First string or char to divide "first string + divide symbol + second string" = "first string  + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
   //             concat_symbol: {
+  //               name: "Divide string",
+  //               description:
+  //                 'Divide string or char to divide "first string + divide symbol + second string" = "first string  + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
   //             secondString: {
+  //               name: "Second string",
+  //               description:
+  //                 'Second string or char to divide "first string + divide symbol + second string" = "first string  + second string"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -527,6 +551,9 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             inputString: {
+  //               name: "Input string",
+  //               description:
+  //                 'Whitespases before and after will be removed " wow " = "wow"',
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -546,6 +573,9 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             expect_number: {
+  //               name: "Expect float",
+  //               description:
+  //                 "String that represents float will converted to float",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -560,6 +590,9 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             expect_number: {
+  //               name: "Expect integer",
+  //               description:
+  //                 "String that represents integer will converted to integer",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },
@@ -574,6 +607,8 @@ export async function getAllModuleFunctionsByModuleTag(module_tag: string) {
   //           avalible_from: ["local", "context"],
   //           arg_schema: {
   //             expect_number: {
+  //               name: "Number",
+  //               description: "Convert number to string",
   //               avalible_from: ["local", "other_wrapper", "context"],
   //               type: ["primitive", "string"],
   //             },

@@ -14,6 +14,8 @@
   import { ResType } from "@/types/wrapper_block_result.type";
 
   const props = defineProps<{
+    name: string;
+    description: string;
     avalibleFrom: ArgPlacementArray;
     formDataType: ArgType;
     argKey: string;
@@ -32,6 +34,7 @@
     ? (props.formDataType[1] as "number" | "text")
     : "text";
 
+  const show_description = ref(false);
   // console.log("local_form_type", local_form_type);
   const avalible_from = computed<ArgPlacementArray>(() => {
     if (predicatePrimitiveArg(props.formDataType)) {
@@ -60,6 +63,12 @@
 <template>
   <!-- <q-card class="argument_key_form"> -->
   <q-card-section>
+    <q-btn
+      :label="name"
+      icon="lightbulb_outline"
+      @click="show_description = !show_description"
+    ></q-btn>
+    <div v-if="show_description">{{ description }}</div>
     <SelectValuePlacement
       :avalible-from="avalible_from"
       @update:model-value="selectValuePlacementUpdateModelValue"

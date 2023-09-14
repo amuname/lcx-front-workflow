@@ -11,7 +11,11 @@ const defaultScript = (): WrapperBlockSchema[] => [
     wrapper: "Start",
     wrapper_arguments: {},
     wrapper_result_schema: {},
-    next_id: String,
+    next: [
+      {
+        id: "end",
+      },
+    ],
   },
   {
     id: "end",
@@ -20,7 +24,7 @@ const defaultScript = (): WrapperBlockSchema[] => [
     wrapper: "End",
     wrapper_arguments: {},
     wrapper_result_schema: {},
-    next_id: String,
+    next: [],
   },
 ];
 
@@ -42,7 +46,7 @@ class Wrapper implements WrapperBlockSchema {
   public wrapper_arguments: object;
   public wrapper_result_schema: any;
   public prev_id: string;
-  public next: string;
+  public next: [{ id: string }] | never[];
 
   constructor(
     wrapper_module: string,
@@ -57,7 +61,7 @@ class Wrapper implements WrapperBlockSchema {
     this.wrapper_arguments = {};
     this.wrapper_result_schema = wrapper_result_schema;
     this.prev_id = prev_id;
-    this.next = next_id;
+    this.next = [{ id: next_id }];
     // this.next.push({ id: next_id });
   }
 }
@@ -91,7 +95,7 @@ export const useWorkflowStore = defineStore("one_tab_workflow", () => {
       "end"
     );
 
-    start_block.next = wrapper.id;
+    start_block.next[0].id = wrapper.id;
     end_block.prev_id = wrapper.id;
 
     script.value.push(wrapper);
@@ -101,9 +105,9 @@ export const useWorkflowStore = defineStore("one_tab_workflow", () => {
     // const tab_script = unref(script);
     const wrapper_id = wrapper.id;
     const prev_id = wrapper.prev_id;
-    const next_id = wrapper.next;
+    const next_id = wrapper.next[0].id;
 
-    findScriptWrapper(prev_id).next = next_id;
+    findScriptWrapper(prev_id).next[0].id = next_id;
     findScriptWrapper(next_id).prev_id = prev_id;
     // delete findScriptWrapper(wrapper_id);
 
@@ -117,19 +121,19 @@ export const useWorkflowStore = defineStore("one_tab_workflow", () => {
   ) {
     // const tab_script = unref(script);
     const prev_id = wrapper.prev_id;
-    const next_id = wrapper.next;
+    const next_id = wrapper.next[0].id;
     if (direction === "up") {
       const prev_script = findScriptWrapper(prev_id);
-      prev_script.next = next_id;
+      prev_script.next[0].id = next_id;
       findScriptWrapper(next_id).prev_id = prev_id;
       wrapper.prev_id = prev_script.prev_id;
-      wrapper.next = prev_id;
+      wrapper.next[0].id = prev_id;
     } else {
       const next_script = findScriptWrapper(next_id);
-      next_script.next = next_id;
+      next_script.next[0].id = next_id;
       findScriptWrapper(prev_id).prev_id = prev_id;
       wrapper.prev_id = next_script.prev_id;
-      wrapper.next = next_id;
+      wrapper.next[0].id = next_id;
     }
   }
 
